@@ -1,0 +1,7 @@
+libraryDependencies += "org.apache.flink" %% "flink-clients" % "1.14.4" % "provided"
+libraryDependencies += "org.apache.flink" %% "flink-streaming-scala" % "1.14.4" % "provided"
+libraryDependencies += "org.apache.flink" %% "flink-walkthrough-common" % "1.14.4"
+libraryDependencies += "org.apache.logging.log4j" % "log4j-api" % "2.17.1" % "runtime"
+libraryDependencies += "org.apache.logging.log4j" % "log4j-core" % "2.17.1" % "runtime"
+libraryDependencies += "org.apache.logging.log4j" % "log4j-slf4j-impl" % "2.17.1" % "runtime"
+scalaVersion := "2.12.15"
