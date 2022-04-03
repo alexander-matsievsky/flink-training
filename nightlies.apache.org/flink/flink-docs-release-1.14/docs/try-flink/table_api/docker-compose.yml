@@ -1,0 +1,71 @@
+services:
+  data-generator:
+    build: ./docker/data-generator
+    depends_on:
+      - kafka
+  grafana:
+    depends_on:
+      - mysql
+    image: grafana/grafana:7.5.8
+    ports:
+      - '3000:3000'
+    volumes:
+      - >-
+        ./docker/grafana-spend-report-init/provisioning/:/etc/grafana/provisioning/
+      - >-
+        ./docker/grafana-spend-report-init/dashboard.json:/etc/grafana/dashboard.json
+      - ./docker/grafana-spend-report-init/grafana.ini:/etc/grafana/grafana.ini
+  jobmanager:
+    build: .
+    command: standalone-job
+    depends_on:
+      - kafka
+      - mysql
+    environment:
+      FLINK_PROPERTIES: 'jobmanager.rpc.address: jobmanager'
+    expose:
+      - '6123'
+    ports:
+      - '8082:8081'
+  kafka:
+    depends_on:
+      - zookeeper
+    environment:
+      HOSTNAME_COMMAND: "route -n | awk '/UG[ \t]/{print $$2}'"
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ADVERTISED_PORT: '9092'
+      KAFKA_CREATE_TOPICS: kafka:1:1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    image: wurstmeister/kafka:2.12-2.2.1
+    ports:
+      - '9092:9092'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  mysql:
+    command: >-
+      --default-authentication-plugin=mysql_native_password
+      --secure_file_priv=/data
+    environment:
+      MYSQL_DATABASE: sql-demo
+      MYSQL_PASSWORD: demo-sql
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_USER: sql-demo
+    image: mysql:8.0.19
+    volumes:
+      - ./docker/mysql-spend-report-init:/docker-entrypoint-initdb.d
+      - /tmp/flink-training-mysql-data:/data
+  taskmanager:
+    build: .
+    command: taskmanager
+    depends_on:
+      - jobmanager
+    environment:
+      FLINK_PROPERTIES: 'jobmanager.rpc.address: jobmanager'
+    expose:
+      - '6121'
+      - '6122'
+  zookeeper:
+    image: wurstmeister/zookeeper:3.4.6
+    ports:
+      - '2181:2181'
+version: '3.8'

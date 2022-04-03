@@ -6,6 +6,7 @@ dependencies:
   - _libgcc_mutex=0.1=conda_forge
   - _openmp_mutex=4.5=1_gnu
   - alsa-lib=1.2.3=h516909a_0
+  - ca-certificates=2021.10.8=ha878542_0
   - cairo=1.16.0=h6cf1ce9_1008
   - expat=2.4.8=h27087fc_0
   - fontconfig=2.13.96=h8e229c2_2
@@ -17,6 +18,7 @@ dependencies:
   - icu=68.2=h9c3ff4c_0
   - jbig=2.1=h7f98852_2003
   - jpeg=9e=h7f98852_0
+  - jq=1.6=h36c2ea0_1000
   - lcms2=2.12=hddcbb42_0
   - lerc=3.0=h9c3ff4c_0
   - libdeflate=1.10=h7f98852_0
@@ -29,16 +31,21 @@ dependencies:
   - libstdcxx-ng=11.2.0=he4da1e4_14
   - libtiff=4.3.0=h542a066_3
   - libuuid=2.32.1=h7f98852_1000
+  - libuv=1.43.0=h7f98852_0
   - libwebp-base=1.2.2=h7f98852_1
   - libxcb=1.13=h7f98852_1004
   - libzlib=1.2.11=h166bdaf_1014
   - lz4-c=1.9.3=h9c3ff4c_1
   - maven=3.8.5=ha770c72_0
+  - nodejs=14.18.3=h92b4a50_1
+  - oniguruma=6.9.7.1=h7f98852_0
   - openjdk=11.0.9.1=h5cc2fde_1
+  - openssl=1.1.1n=h166bdaf_0
   - pcre=8.45=h9c3ff4c_0
   - pixman=0.40.0=h36c2ea0_0
   - pthread-stubs=0.4=h36c2ea0_1001
   - sbt=1.6.2=hd8ed1ab_0
+  - tree=2.0.0=h7f98852_0
   - xorg-fixesproto=5.0=h7f98852_1002
   - xorg-inputproto=2.3.2=h7f98852_1002
   - xorg-kbproto=1.0.7=h7f98852_1002
